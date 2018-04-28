@@ -1,10 +1,9 @@
 #!/bin/bash
-#By kguza
 echo "
 =============================================
- credit   : Dev By Kguza
- Facebook : http://plang-vpn.online/Facebook
- Line     : Line http://plang-vpn.online/Line
+ credit   : Dev By LIFESTYLE-VPN
+ Facebook : Facebook : https://www.facebook.com/jamejaturaporn.suriya.5
+ website  : https://www.lifestyle-vpn.com
  ============================================="
 echo -e "         \033[1;33mRemover Usuarios Expirados\033[0m"
 datahoje=$(date +%s)

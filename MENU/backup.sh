@@ -4,16 +4,10 @@ if [[ $1 == "" ]]
 then
 echo " "
 echo -e "\033[01;31m  
-
-┅═हই✰•=======✮-[SERVER•❍•PREMIUM]-✮========•✰ইह═┅"
+[SERVER•❍•PREMIUM]"
 echo " "
-echo " ╔•═•⊰✯⊱•═•⊰✯⊱•═•⊰✯⊱•═⊰✯⊱•═•⊰✯⊱═•╗"
 echo " "
-echo " ─═╬≫║✰ [-SETUP SCRIPT [ B [̲̅ Y [̲̅ BANK TK-] ✰║≪╬═─"
-echo " "
-echo " ╚••═•⊰✯⊱•═•⊰✯⊱•═•⊰✯⊱•═⊰✯⊱•═•⊰✯⊱═•╝"
-echo " "
-echo " ┅═हই✰•===✮-[Script OS Debian 32 & 64]-✮===•✰ইह═┅"
+echo "[Script OS Debian 32 & 64]"
 echo "====================================
   User backup And Restore ..? 
 ====================================

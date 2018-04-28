@@ -1,6 +1,5 @@
 #!/bin/bash
 #this user expire in 1 day
-#Dev By kguza
 
 IP=`dig +short myip.opendns.com @resolver1.opendns.com`
 
@@ -19,8 +18,6 @@ echo -e "port   : 443 ,22 ,143 ,80"
 echo -e "User : $Login"
 echo -e "Pass : $Passwd"
 echo -e ""
-echo -e "\033[1;33m============Payload============="
-echo -e "\033[01;33mCONNECT [host_port]@lvs.truehits.in.th [protocol][crlf]Host: Kguza.naver.jp[crlf][crlf]\033[0m"
 echo -e ""
 echo -e "\033[1;33m=======Openvpn:::Account========"
 echo -e "=========Download File=========="
@@ -29,17 +26,23 @@ echo -e "================================"
 echo -e "==========Download App=========="
 echo -e "http://$IP:81"
 echo -e "================================"
-echo -e "Line Line http://plang-vpn.online/Line"
-echo -e "Facebook http://plang-vpn.online/Facebook"
-echo -e "website http://plang-vpn.online/Website"
+echo -e "Facebook : https://www.facebook.com/jamejaturaporn.suriya.5"
+echo -e "website  : https://www.lifestyle-vpn.com"
 echo -e "------------------------------------------------------------"
-echo "client
+echo "#===========================#
+# L I F E S T Y L E - V P N #
+#===========================#
+machine-readable-output
+allow-recursive-routing
+ifconfig-nowarn
+client
+verb 4
 dev tun
 proto tcp
-remote $IP:1194&static.tlcdn4.com.naver.jp 
-http-proxy-retry 
+remote $IP:1194@www.truelife.com.line.naver.jp 1194 tcp-client
+client
+auth-user-pass
 http-proxy $IP 8080
-http-proxy-option CUSTOM-HEADER Host ps.line.naver.jp
 connect-retry 1
 connect-timeout 120
 resolv-retry infinite
@@ -54,8 +57,8 @@ mute-replay-warnings
 verb 2
 sndbuf 393216
 rcvbuf 393216
-push 'sndbuf 393216'
-push 'rcvbuf 393216'
+push "sndbuf 393216"
+push "rcvbuf 393216"
 cipher none
 comp-lzo
 script-security 3

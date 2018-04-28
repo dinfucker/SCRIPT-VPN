@@ -11,8 +11,6 @@ useradd -e `date -d "$Day days" +"%Y-%m-%d"` -s /bin/false -M $Login
 echo -e "$Passwd\n$Passwd\n"|passwd $Login &> /dev/null
 echo -e ""
 echo -e "\033[1;33m======== SSH ACCOUNT============"
-echo -e "=======Downloab File HTTP======="
-echo -e "http://$IP:81/HTTP.ehi"
 echo -e "Host IP Proxy : $IP 8080"
 echo -e "port   : 443 ,22 ,143 ,80"
 echo -e "User : $Login"

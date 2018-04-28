@@ -13,9 +13,9 @@ apt-get -y install ufw
 apt-get -y install sudo
 
 # set repo
-wget -O /etc/apt/sources.list "http://tepsus-slow-vpn.xyz/auto/sources.list.debian8"
-wget "http://tepsus-slow-vpn.xyz/auto/dotdeb.gpg"
-wget "http://tepsus-slow-vpn.xyz/auto/jcameron-key.asc"
+wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/sources.list.debian8"
+wget "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/dotdeb.gpg"
+wget "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/jcameron-key.asc"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 cat jcameron-key.asc | apt-key add -;rm jcameron-key.asc
 
@@ -47,39 +47,39 @@ echo 'echo -e ""' >> .bashrc
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "http://tepsus-slow-vpn.xyz/auto/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/nginx.conf"
 mkdir -p /home/vps/public_html
 
 
-wget -O /etc/nginx/conf.d/vps.conf "http://tepsus-slow-vpn.xyz/auto/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/vps.conf"
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "http://tepsus-slow-vpn.xyz/auto/openvpn-debian.tar"
+wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/openvpn-debian.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "http://tepsus-slow-vpn.xyz/auto/1194.conf"
+wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/1194.conf"
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 iptables -t nat -I POSTROUTING -s 192.168.100.0/24 -o eth0 -j MASQUERADE
 iptables-save > /etc/iptables_yg_baru_dibikin.conf
-wget -O /etc/network/if-up.d/iptables "http://tepsus-slow-vpn.xyz/auto/iptables"
+wget -O /etc/network/if-up.d/iptables "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/iptables"
 chmod +x /etc/network/if-up.d/iptables
 service openvpn restart
 
 # konfigurasi openvpn
 cd /etc/openvpn/
-wget -O /etc/openvpn/True-Dtac.ovpn "http://tepsus-slow-vpn.xyz/auto/client-1194.conf"
+wget -O /etc/openvpn/True-Dtac.ovpn "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/client-1194.conf"
 MYIP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | grep -v '192.168'`;
 sed -i s/xxxxxxxxx/$MYIP/g /etc/openvpn/True-Dtac.ovpn;
 cp True-Dtac.ovpn /home/vps/public_html/
 
 # install badvpn
 cd
-wget -O /usr/bin/badvpn-udpgw "http://tepsus-slow-vpn.xyz/auto/badvpn-udpgw"
+wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/badvpn-udpgw"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "http://tepsus-slow-vpn.xyz/auto/badvpn-udpgw64"
+  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/badvpn-udpgw64"
 fi
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
@@ -104,40 +104,47 @@ service dropbear restart
 # Install Squid
 apt-get -y install squid3
 cp /etc/squid3/squid.conf /etc/squid3/squid.conf.orig
-wget -O /etc/squid3/squid.conf "http://tepsus-slow-vpn.xyz/auto/squid3.conf" 
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/squid3.conf" 
 MYIP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | grep -v '192.168'`;
 sed -i s/xxxxxxxxx/$MYIP/g /etc/squid3/squid.conf;
 service squid3 restart
 
 # install webmin
 cd
-wget -O webmin-current.deb "http://tepsus-slow-vpn.xyz/auto/webmin-current.deb"
-dpkg -i --force-all webmin-current.deb;
-apt-get -y -f install;
-rm /root/webmin-current.deb
+wget -O webmin-current.deb "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/webmin-current.deb"
+dpkg -i --force-all webmin-current.deb
+wget http://www.webmin.com/jcameron-key.asc
+apt-key add jcameron-key.asc
+apt-get update
+apt-get install -y webmin
+sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
+apt-get -y --force-yes -f install libxml-parser-perl
 service webmin restart
+service vnstat restart
 
 # download script
 cd /usr/bin
-wget -O menu "http://tepsus-slow-vpn.xyz/auto/menu.sh"
-wget -O a "http://tepsus-slow-vpn.xyz/auto/adduser.sh"
-wget -O b "http://tepsus-slow-vpn.xyz/auto/testuser.sh"
-wget -O c "http://tepsus-slow-vpn.xyz/auto/rename.sh"
-wget -O d "http://tepsus-slow-vpn.xyz/auto/repass.sh"
-wget -O e "http://tepsus-slow-vpn.xyz/auto/delet.sh"
-wget -O f "http://tepsus-slow-vpn.xyz/auto/deletuserxp.sh"
-wget -O g "http://tepsus-slow-vpn.xyz/auto/viewuser.sh"
-wget -O h "http://tepsus-slow-vpn.xyz/auto/restart.sh"
-wget -O i "http://tepsus-slow-vpn.xyz/auto/speedtest.py"
-wget -O j "http://tepsus-slow-vpn.xyz/auto/online.sh"
-wget -O k "http://tepsus-slow-vpn.xyz/auto/viewlogin.sh"
-wget -O l "http://tepsus-slow-vpn.xyz/auto/aboutsystem.sh"
-wget -O m "http://tepsus-slow-vpn.xyz/auto/lock.sh"
-wget -O n "http://tepsus-slow-vpn.xyz/auto/unlock.sh"
-wget -O o "http://tepsus-slow-vpn.xyz/auto/logscrip.sh"
-wget -O p "http://tepsus-slow-vpn.xyz/auto/aboutscrip.sh"
-wget -O q "http://tepsus-slow-vpn.xyz/auto/httpcredit.sh"
-wget -O r "http://tepsus-slow-vpn.xyz/auto/TimeReboot.sh"
+wget -O menu "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/menu.sh"
+wget -O 1 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/adduser.sh"
+wget -O 2 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/testuser.sh"
+wget -O 3 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/rename.sh"
+wget -O 4 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/repass.sh"
+wget -O 5 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/delet.sh"
+wget -O 6 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/deletuserxp.sh"
+wget -O 7 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/viewuser.sh"
+wget -O 8 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/restart.sh"
+wget -O 9 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/speedtest.py"
+wget -O 10 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/online.sh"
+wget -O 11 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/viewlogin.sh"
+wget -O 12 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/aboutsystem.sh"
+wget -O 13 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/lock.sh"
+wget -O 14 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/unlock.sh"
+wget -O 15 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/logscrip.sh"
+wget -O 16 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/aboutscrip.sh"
+wget -O 17 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/httpcredit.sh"
+wget -O 18 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/TimeReboot.sh"
+wget -O 19 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/backup.sh
+wget -O 20 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/bandwidth.html
 
 echo "0 0 * * * root /sbin/reboot" > /etc/cron.d/reboot
 
@@ -147,24 +154,26 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 chmod +x menu
-chmod +x a
-chmod +x b
-chmod +x c
-chmod +x d
-chmod +x e
-chmod +x f
-chmod +x g
-chmod +x h
-chmod +x i
-chmod +x j
-chmod +x k
-chmod +x l
-chmod +x m
-chmod +x n
-chmod +x o
-chmod +x p
-chmod +x q
-chmod +x r
+chmod +x 1
+chmod +x 2
+chmod +x 3
+chmod +x 4
+chmod +x 5
+chmod +x 6
+chmod +x 7
+chmod +x 8
+chmod +x 9
+chmod +x 10
+chmod +x 11
+chmod +x 12
+chmod +x 13
+chmod +x 14
+chmod +x 15
+chmod +x 16
+chmod +x 17
+chmod +x 18
+chmod +x 19
+chmod +x 20
 
 # finishing
 cd
@@ -182,7 +191,7 @@ echo "unset HISTFILE" >> /etc/profile
 # info
 clear
 echo " =============
- Kguza figther
+ LIFESTYLE-VPN
  =============
  Service 
  ---------------------------------------------
@@ -203,14 +212,11 @@ echo " =============
  Timezone : Asia/Thailand (GMT +7) 
  IPv6     : [off] 
  =============================================
- credit.  : Dev By Kguza
- Facebook : http://plang-vpn.online/Facebook
- Line     : Line http://plang-vpn.online/Line
- website:http://plang-vpn.online/Website
+ credit.  : Dev By LIFESTYLE-VPN
+ Facebook : https://www.facebook.com/jamejaturaporn.suriya.5
+ website  : https://www.lifestyle-vpn.com
  ============================================="
 echo " VPS AUTO REBOOT 00.00"
-echo " ยซยซยซยซยซยซยซยซยซยซยซยซยซยซยซยปยปยปยปยปยปยปยปยปยปยปยปยปยปยปยป " 
 echo " prin { menu } show list on menu "
-echo " ยซยซยซยซยซยซยซยซยซยซยซยซยซยซยซยปยปยปยปยปยปยปยปยปยปยปยปยปยปยปยป "
 cd
-echo "Auto Scrip Setup By Kguza" > admin
+echo "Auto Scrip Setup By LIFESTYLE-VPN" > admin

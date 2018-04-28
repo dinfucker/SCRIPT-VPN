@@ -2,7 +2,7 @@
 #!/bin/bash
 #
 # Original script by fornesia, rzengineer and fawzya
-# Mod by kguza wullop onuamit
+# Mod by LIFESTYLE-VPN wullop onuamit
 # ==================================================
 
 # go to root
@@ -37,10 +37,10 @@ apt-get install neofetch
 echo "clear" >> .bashrc
 echo 'echo -e " ================================="' >> .bashrc
 echo 'echo -e " Wallcom to server Debian7-8"' >> .bashrc
-echo 'echo -e " Script mod by kguza wullop onuamit"' >> .bashrc
-echo 'echo -e " ยซยซยซยซยซยซยซยซยซยซยซยซยซยซยซยซยซยปยปยปยปยปยปยปยปยปยปยปยปยปยปยปยป"' >> .bashrc
+echo 'echo -e " Script mod by LIFESTYLE-VPN wullop onuamit"' >> .bashrc
+echo 'echo -e " ---"' >> .bashrc
 echo 'echo -e " prin { menu } Show menu items"' >> .bashrc
-echo 'echo -e " ยซยซยซยซยซยซยซยซยซยซยซยซยซยซยซยปยปยปยปยปยปยปยปยปยปยปยปยปยป"' >> .bashrc
+echo 'echo -e " ---"' >> .bashrc
 echo 'echo -e ""' >> .bashrc
 
 # install webserver

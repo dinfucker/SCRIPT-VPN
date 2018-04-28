@@ -44,9 +44,9 @@ client
 verb 4
 dev tun
 proto tcp
-remote xxxxxxxxx:1194@www.truelife.com.line.naver.jp 1194 tcp-client
+remote $IP:1194@www.truelife.com.line.naver.jp 1194 tcp-client
 client
-http-proxy th-vip1-lifestyle-vpn.ga 8080
+http-proxy $IP 8080
 connect-retry 1
 connect-timeout 120
 resolv-retry infinite

@@ -143,7 +143,7 @@ wget -O 15 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/l
 wget -O 16 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/aboutscrip.sh"
 wget -O 17 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/httpcredit.sh"
 wget -O 18 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/TimeReboot.sh"
-wget -O 19 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/backup.sh
+
 
 echo "0 0 * * * root /sbin/reboot" > /etc/cron.d/reboot
 
@@ -171,7 +171,7 @@ chmod +x 15
 chmod +x 16
 chmod +x 17
 chmod +x 18
-chmod +x 19
+
 
 # finishing
 cd

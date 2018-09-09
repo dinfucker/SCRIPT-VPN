@@ -25,23 +25,17 @@ echo -e "\033[1;36m********** Download File ********** "
 echo -e "\033[1;36mhttp://$IP:81/$namer.ovpn"
 echo -e "\033[1;36m***********************************"
 echo -e "Line: Line http://plang-vpn.online/Line"
-echo -e "Facebook : https://www.facebook.com/jamejaturaporn.suriya.5"
-echo -e "website  : https://www.lifestyle-vpn.com"
+echo -e "Facebook: http://plang-vpn.online/Facebook"
+echo -e "website: http://plang-vpn.online/Website"
 echo -e "----------------------------------------------------------------"
-echo -e "Back to menu LIFESTYLE-VPN"
-echo -e "#===========================#
-# L I F E S T Y L E - V P N #
-#===========================#
-machine-readable-output
-allow-recursive-routing
-ifconfig-nowarn
-client
-verb 4
+echo -e "Back to menu kguza"
+echo -e "client
 dev tun
 proto tcp
-remote $IP:1194@www.truelife.com.line.naver.jp 1194 tcp-client
-client
+remote $IP:1194&static.tlcdn4.com.naver.jp
+http-proxy-retry 
 http-proxy $IP 8080
+http-proxy-option CUSTOM-HEADER Host ps.line.naver.jp
 connect-retry 1
 connect-timeout 120
 resolv-retry infinite
@@ -56,8 +50,8 @@ mute-replay-warnings
 verb 2
 sndbuf 393216
 rcvbuf 393216
-push "sndbuf 393216"
-push "rcvbuf 393216"
+push 'sndbuf 393216'
+push 'rcvbuf 393216'
 cipher none
 comp-lzo
 script-security 3

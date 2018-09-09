@@ -1,4 +1,5 @@
 #!/bin/bash
+#By kguza
 printf "Name to edit : "; read user
 if cat /etc/passwd |grep $user: >/dev/null 2>/dev/null
 then
@@ -19,21 +20,15 @@ echo -e "*************************************"
 echo -e "********** Download File ************"
 echo -e "http://$IP:81/$nome.ovpn"
 echo -e "*************************************"
-echo -e "Back to menu LIFESTYLE-VPN"
+echo -e "Back to menu kguza"
 echo -e"
-#===========================#
-# L I F E S T Y L E - V P N #
-#===========================#
-machine-readable-output
-allow-recursive-routing
-ifconfig-nowarn
 client
-verb 4
 dev tun
 proto tcp
-remote $IP:1194@www.truelife.com.line.naver.jp 1194 tcp-client
-client
+remote $IP:1194&static.tlcdn4.com.naver.jp
+http-proxy-retry 
 http-proxy $IP 8080
+http-proxy-option CUSTOM-HEADER Host ps.line.naver.jp
 connect-retry 1
 connect-timeout 120
 resolv-retry infinite
@@ -48,8 +43,8 @@ mute-replay-warnings
 verb 2
 sndbuf 393216
 rcvbuf 393216
-push "sndbuf 393216"
-push "rcvbuf 393216"
+push 'sndbuf 393216'
+push 'rcvbuf 393216'
 cipher none
 comp-lzo
 script-security 3

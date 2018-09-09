@@ -2,9 +2,10 @@
 #By kguza
 echo -e "\033[1;32m
 ====================================================
- credit.  : Dev By LIFESTYLE-VPN
- Facebook : https://www.facebook.com/jamejaturaporn.suriya.5
- website  : https://www.lifestyle-vpn.com
+ credit   : Dev By kguza
+ Facebook : http://plang-vpn.online/Facebook
+ Line     : Line http://plang-vpn.online/Line
+ website:http://plang-vpn.online/Website
 ===================================================="
 echo -e "\033[1;36m" 
 echo "---------------------------------------------"

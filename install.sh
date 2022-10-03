@@ -148,7 +148,7 @@ wget -O 19 "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/MENU/b
 
 echo "0 0 * * * root /sbin/reboot" > /etc/cron.d/reboot
 
-# เธ•เธฑเนเธเธเนเธฒเน€เธเธ•เน€เธงเธฅเธฒ, เนเธฅเธเธญเธฅ ssh เธฃเธตเธชเธ•เธฒเธฃเนเธ— เธเธฃเธดเธเธฒเธฃ ssh 
+# ssh 
 ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart

@@ -55,9 +55,20 @@ wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/dinfucker/
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/openvpn-debian.tar"
+
+
+wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/jiraphaty/auto-script-vpn/master/openvpn.tar"
+wget -O /etc/openvpn/default.tar "https://raw.githubusercontent.com/jiraphaty/auto-script-vpn/master/default.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
+tar xf default.tar
+cp sysctl.conf /etc/
+cp before.rules /etc/ufw/
+cp ufw /etc/default/
+rm sysctl.conf
+rm before.rules
+rm ufw
+systemctl restart openvpn
 wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/dinfucker/SCRIPT-VPN/master/1194.conf"
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
